@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { useState } from 'react'
 import{
     Button,
     Modal,
@@ -11,50 +12,48 @@ import{
 } from 'reactstrap'
 import { connect } from 'react-redux'
 import { addItem} from '../actions/itemActions'
-const uuid = require('uuid')
- class ItemModal extends Component {
-   state = {
-     modal:false,
-     name: ''
-   }
 
-   toggle = () =>{
-     this.setState({
-       modal: !this.state.modal
-     })
-   }
 
-   onChange = (e) => {
-     this.setState({[e.target.name]: e.target.value})
-   }
-   onSubmit = e => {
-     e.preventDefault();
-     const newItem ={
-       name: this.state.name
-      }
-      // Add item via addItem action
-      this.props.addItem(newItem)
-      // Close modal
-      this.toggle();
+const ItemModal = () => {
+  const [modal,setModal] = useState(false)
+  const [name,setName] = useState('')
 
-   }
-  render() {
-    return (
-      <div>
-        <Button
+
+  function toggle(){
+    setModal(!modal)
+  }
+
+  function onChange (e){
+    setName({[e.target.name]: e.taget.value})
+  }
+ function onSubmit (e) {
+    e.preventDefault();
+    const newItem ={ 
+      name
+     }
+     // Add item via addItem action
+     addItem(newItem);
+
+     // Close modal
+     toggle();
+
+  }
+  return (
+    <div>
+      <Button
         color="dark"
         style={{marginBottom:'2rem'}}
-        onClick = {this.toggle}
+        onClick = {toggle}
         >Add Item</Button>  
 
         <Modal 
-        isOpen={this.state.modal}
-        toggle={this.toggle}>
-          <ModalHeader toggle={this.toggle}>
+        isOpen={modal}
+        toggle={toggle}>
+          <ModalHeader toggle={toggle}>
             Add To Shopping List
           </ModalHeader>
           <ModalBody>
-            <Form onSubmit={this.onSubmit}>
+            <Form onSubmit={onSubmit}>
               <FormGroup>
                 <Label for='item'>Item</Label>
                 <Input
@@ -62,7 +61,7 @@ const uuid = require('uuid')
                 name='name'
                 id='item'
                 placehodler='Add Shopping Item'
-                onChange={this.onChange}
+                onChange={onChange}
                 ></Input>
                 <Button
                 color="dark"
@@ -74,9 +73,8 @@ const uuid = require('uuid')
             </Form>
           </ModalBody>
         </Modal>
-      </div>
-    )
-  }
+    </div>
+  )
 }
 
 const mapStateToProps = state => ({

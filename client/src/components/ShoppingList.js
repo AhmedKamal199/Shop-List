@@ -5,7 +5,7 @@ import {CSSTransition, TransitionGroup} from 'react-transition-group'
 import { connect } from 'react-redux'
 import { getItems,deleteItem } from '../actions/itemActions'
 import PropTypes from 'prop-types'
-const uuid = require('uuid')
+
 
 class ShoppingList extends Component {
     componentDidMount(){
