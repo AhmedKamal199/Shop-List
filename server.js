@@ -3,8 +3,11 @@ const mongo = require("mongoose");
 const bodyParser = require("body-parser");
 const path = require("path");
 const config = require("config");
+const cors = require("cors");
 
 const app = express();
+
+app.use(cors("*"));
 
 // BodyParser midleware
 
@@ -18,11 +21,11 @@ const db = config.get("mongoURI");
 
 mongo
   .connect(db, {
-    useNewUrlParser: true,
+    useNewUrlParser: true
     //useCreateIndex: true
   })
   .then(() => console.log("MongoDB Connected ..."))
-  .catch((err) => console.log(err));
+  .catch(err => console.log(err));
 
 // u
 
