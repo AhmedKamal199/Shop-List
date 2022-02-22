@@ -68,6 +68,45 @@ export const register = ({ name, email, password }) => dispatch => {
     });
 };
 
+// Login user
+
+export const login = ({ email, password }) => dispatch => {
+  //Headers
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+  // Request body
+  const body = JSON.stringify({ email, password });
+  console.log("actionsfrom auth auctions Login");
+
+  axios
+    .post("http://localhost:5000/api/auth", body, config)
+    .then(res => {
+      console.log("suc");
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      console.log(err.response.data);
+      dispatch(
+        returnErrors(err.response.data, err.response.status, "LOGIN_FAIL")
+      );
+      dispatch({
+        type: LOGIN_FAIL
+      });
+    });
+};
+
+export const logout = () => {
+  return {
+    type: LOGOUT_SUCCESS
+  };
+};
+
 // Setup config/header and token
 export const tokenConfig = getState => {
   const token = getState().auth.token;

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { useState, useEffect } from "react";
 import {
   Button,
@@ -13,29 +13,36 @@ import {
   Alert
 } from "reactstrap";
 
-import { connect, useDispatch } from "react-redux";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { register } from "../../actions/authActions";
-const RegisterModal = ({ error, isAuthenticated, registerFromProps }) => {
+import { clearErrors } from "../../actions/errorActions";
+const RegisterModal = ({ error, isAuthenticated, register, clearErrors }) => {
   const [modal, setModal] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [msg, SetMsg] = useState(null);
-  const [prevError, setPrevError] = useState();
-
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if (error) {
       // check error type
-        SetMsg(error.msg.msg);
-      } else {
-        SetMsg(null);
+      console.log(error.id);
+      SetMsg(error.msg.msg);
+    } else {
+      SetMsg(null);
+    }
+
+    if (modal) {
+      if (isAuthenticated) {
+        toggle();
+        clearErrors();
       }
-  }, [error]);
+    }
+  }, [error, modal]);
   function toggle() {
-    SetMsg(null)
+    // Clear Errors
+    clearErrors();
     setModal(!modal);
   }
 
@@ -48,7 +55,7 @@ const RegisterModal = ({ error, isAuthenticated, registerFromProps }) => {
       email,
       password
     };
-    registerFromProps(NewUser);
+    register(NewUser);
     // dispatch(register)
   }
   return (
@@ -117,5 +124,5 @@ RegisterModal.propTypes = {
 
 export default connect(
   mapStateToProps,
-  { registerFromProps: register }
+  { register, clearErrors }
 )(RegisterModal);
