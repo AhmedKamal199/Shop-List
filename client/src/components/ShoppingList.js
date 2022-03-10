@@ -31,7 +31,7 @@ const ShoppingList = ({ getItems, deleteItem, item, isAuthneticated }) => {
                   ) : (
                     ""
                   )}
-                  {name}
+                  {name.name}
                 </ListGroupItem>
               </CSSTransition>
             ))}
