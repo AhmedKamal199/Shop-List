@@ -1,11 +1,12 @@
 import { GET_ITEMS, ADD_ITEM, DELETE_ITEM, ITEMS_LOADING } from "./types";
 import axios from "axios";
+const url = require("./config");
 import { tokenConfig } from "./authActions";
 import { returnErrors } from "./errorActions";
 export const getItems = () => dispatch => {
   dispatch(setItemsLoading());
   axios
-    .get("http://localhost:5000/api/items")
+    .get(`${url}/items`)
     .then(res =>
       dispatch({
         type: GET_ITEMS,
@@ -19,7 +20,7 @@ export const getItems = () => dispatch => {
 
 export const addItem = item => (dispatch, getState) => {
   axios
-    .post("http://localhost:5000/api/items", item, tokenConfig(getState))
+    .post(`${url}/items`, item, tokenConfig(getState))
     .then(res =>
       dispatch({
         type: ADD_ITEM,
@@ -32,7 +33,7 @@ export const addItem = item => (dispatch, getState) => {
 };
 export const deleteItem = id => (dispatch, getState) => {
   axios
-    .delete(`http://localhost:5000/api/items/${id}`, tokenConfig(getState))
+    .delete(`${url}/items/${id}`, tokenConfig(getState))
     .then(res =>
       dispatch({
         type: DELETE_ITEM,

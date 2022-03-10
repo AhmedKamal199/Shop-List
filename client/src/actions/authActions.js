@@ -10,6 +10,7 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAIL
 } from "../actions/types";
+const url = require('./config')
 
 // Check token & load user
 export const loadUser = () => (dispatch, getState) => {
@@ -19,7 +20,7 @@ export const loadUser = () => (dispatch, getState) => {
   // Get token from localstorage
 
   axios
-    .get("http://localhost:5000/api/auth/user", tokenConfig(getState))
+    .get(`${url}/auth/user`, tokenConfig(getState))
     .then(res =>
       dispatch({
         type: USER_LOADED,
@@ -49,7 +50,7 @@ export const register = ({ name, email, password }) => dispatch => {
   console.log("actionsfrom auth auctions register");
 
   axios
-    .post("http://localhost:5000/api/users", body, config)
+    .post(`${url}/users`, body, config)
     .then(res => {
       console.log("suc");
       dispatch({
@@ -82,7 +83,7 @@ export const login = ({ email, password }) => dispatch => {
   console.log("actionsfrom auth auctions Login");
 
   axios
-    .post("http://localhost:5000/api/auth", body, config)
+    .post(`${url}/auth`, body, config)
     .then(res => {
       console.log("suc");
       dispatch({

@@ -1,3 +1,3 @@
 export default {
-  url: "http://localhost:5000/api/"
+  url: "ubuntu@54.37.232.80"
 };
