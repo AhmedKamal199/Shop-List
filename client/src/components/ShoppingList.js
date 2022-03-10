@@ -44,6 +44,7 @@ const ShoppingList = ({ getItems, deleteItem, item, isAuthneticated }) => {
 
 ShoppingList.propTypes = {
   getItems: PropTypes.func.isRequired,
+  deleteItems: PropTypes.func.isRequired,
   item: PropTypes.object.isRequired,
   isAuthneticated: PropTypes.bool.isRequired
 };
