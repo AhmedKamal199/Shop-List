@@ -31,7 +31,7 @@ const ItemModal = ({ addItem, isAuthneticated }) => {
       name
     };
     // Add item via addItem action
-    addItem(newItem);
+    addItem(newItem.name);
     console.log(newItem);
     // Close modal
     toggle();
