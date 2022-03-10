@@ -10,7 +10,7 @@ const ShoppingList = ({ getItems, deleteItem, item, isAuthneticated }) => {
   const { items } = item;
   useEffect(() => {
     getItems();
-  });
+  }, []);
   return (
     <div>
       <Container>

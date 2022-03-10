@@ -10,7 +10,7 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAIL
 } from "../actions/types";
-const url = require('./config')
+import url from "./config"
 
 // Check token & load user
 export const loadUser = () => (dispatch, getState) => {

@@ -1,8 +1,11 @@
 import { GET_ITEMS, ADD_ITEM, DELETE_ITEM, ITEMS_LOADING } from "./types";
 import axios from "axios";
-const url = require("./config");
 import { tokenConfig } from "./authActions";
 import { returnErrors } from "./errorActions";
+import url from "./config"
+
+console.log(url)
+
 export const getItems = () => dispatch => {
   dispatch(setItemsLoading());
   axios
