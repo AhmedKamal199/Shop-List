@@ -21,7 +21,7 @@ router.get("/", (req, res) => {
 
 router.post("/", auth, (req, res) => {
   const newItem = new Item({
-    name: req.body.name.name
+    name: req.body.name
   });
   newItem.save().then(item => res.json(item.name));
 });
@@ -31,7 +31,9 @@ router.post("/", auth, (req, res) => {
 // @access Private
 
 router.delete("/:id", auth, (req, res) => {
-  Item.findById(req.params.id)
+  Item.findById(req.params.id);
+  console
+    .log(req.params.id)
     .then(item => item.remove().then(() => res.json({ success: true })))
     .catch(err => res.status(404).json({ success: false }));
 });

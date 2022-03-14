@@ -22,9 +22,7 @@ const ItemModal = ({ addItem, isAuthneticated }) => {
     setModal(!modal);
   }
 
-  function onChange(e) {
-    setName({ [e.target.name]: e.target.value });
-  }
+  
   function onSubmit(e) {
     e.preventDefault();
     const newItem = {
@@ -57,7 +55,7 @@ const ItemModal = ({ addItem, isAuthneticated }) => {
                 name="name"
                 id="item"
                 placehodler="Add Shopping Item"
-                onChange={onChange}
+                onChange={(e) => setName(e.target.value)}
               ></Input>
               <Button color="dark" style={{ marginTop: "2rem" }} block>
                 Add Item
