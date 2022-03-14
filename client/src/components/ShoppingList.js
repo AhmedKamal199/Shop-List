@@ -19,7 +19,6 @@ const ShoppingList = ({ getItems, deleteItem, item, isAuthneticated }) => {
             {items.map(({ _id, name }) => (
               <CSSTransition key={_id} timeout={500} classNames="fade">
                 <ListGroupItem>
-                  <h1>{name}</h1>
                   {isAuthneticated ? (
                     <Button
                       className="remove-btn"
